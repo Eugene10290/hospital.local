@@ -35,9 +35,11 @@ Route::group(['prefix' => 'admin'], function(){
         'blogs' => 'blog'
     ]);
     Route::resource('/notes', 'NotesController');
-
 });
 Route::group(['prefix' => 'user'], function() {
     Route::get('orders', 'ProfileController@index');
     Route::get('orders/download/{name}','ProfileController@downloadPdf');
+});
+Route::group(['prefix' => 'doctors'], function(){
+    Route::get('list', 'RegistrationController@index');
 });

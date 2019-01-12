@@ -46,7 +46,7 @@
                             <ul class="navbar-nav ml-auto">
                                 <!-- Authentication Links -->
                                 <ul class="mnu">
-                                    <li><a href="{{ url('/registration') }}">Запис</a></li>
+                                    <li><a href="{{ url('/doctors/list') }}">Запис</a></li>
                                     <li><a href="{{ url('/blog') }}">Новини</a></li>
                                     <li><a href="#">Методики</a>
                                         <ul>
