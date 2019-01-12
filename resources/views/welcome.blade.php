@@ -11,22 +11,30 @@
 			  <div class="slider__item slider__item_active">
 			    <img src="img/bg1.jpg" alt="1" class="slide-img">
 			    	<div class="slide-content">
-			    		<h3>Мега крутой заголовок1</h3>
-			    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel unde impedit earum dicta veritatis odio facilis, consequatur culpa molestiae obcaecati! Quam saepe eum natus quos ipsa omnis at nostrum amet.</p>
+			    		<h3>КМУ "Городская больница"</h3>
+			    		<p>Является базой подготовки интернов травматологического, терапевтического профиля.
+
+							В составе поликлиничной службы КМУ «Городская больница №3» Краматорска есть территориальная поликлиника с отделением дневного стационара на 70 мест, городской круглосуточный травмпункт, филиал поликлиники на ПАО «НКМЗ» на договорных началах, отделение профилактических осмотров по платным услугам. </p>
 			    	</div>
 			  </div>
 			  <div class="slider__item">
 			    <img src="img/bg2.jpg" alt="1" class="slide-img">
 			    	<div class="slide-content">
-			    		<h3>Мега крутой заголовок2</h3>
-			    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel unde impedit earum dicta veritatis odio facilis, consequatur culpa molestiae obcaecati! Quam saepe eum natus quos ipsa omnis at nostrum amet.</p>
+			    		<h3>Вспомогательные службы: </h3>
+			    		<p>физиотерапевтическое отделение, клинико-диагностическая лаборатория, флюорографический и рентгеновский кабинеты, кабинет ультразвукового исследования, кабинет функциональной диагностики, процедурный кабинет, кабинет медицинской статистики. </p>
 			    	</div>
 			  </div>
 			  <div class="slider__item">
 			    <img src="img/bg3.jpg" alt="1" class="slide-img">
 			    	<div class="slide-content">
-			    		<h3>Мега крутой заголовок3</h3>
-			    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel unde impedit earum dicta veritatis odio facilis, consequatur culpa molestiae obcaecati! Quam saepe eum natus quos ipsa omnis at nostrum amet.</p>
+			    		<h3>Отделение</h3>
+			    		<p>Отделение дневного стационара поликлиники расположено в отдельном здании на территории больничного городка КМУ «Городская больница №3».
+							Отделение расчитано на 70 мест общего профиля, в том числе: <br>
+							20 коек гастроэнтерологических;
+							15 коек терапевтических;
+							15 коек для лечения больных с сердечно-сосудистой патологией;
+							10 коек неврологических;
+							10 коек гинекологических.</p>
 			    	</div>
 			  </div>
 			</div>
@@ -44,14 +52,14 @@
 		    	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="block-mnu1">
 						<img src="img/promobox1.jpg" alt="">
-						<h3>Играй с душой</h3>
+						<h3>Запис до лiкаря</h3>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<a href="{{ url('shops') }}">
 					<div class="block-mnu2">
 						<img src="img/promobox2.jpg" alt="">
-						<h3>Заказать ноты</h3>
+						<h3>Методики</h3>
 					</div>
 					</a>
 				</div>
@@ -59,7 +67,7 @@
 					<a href="{{ url('blog/')}}">
 			    	<div class="block-mnu3">
 			    		<img src="img/promobox3.jpg" alt="">
-			    		<h3>Блог</h3>
+			    		<h3>Новини</h3>
 			    	</div>
 					</a>
 			    </div>
@@ -100,7 +108,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
-					<a href="#"><h4>Название крутых нот</h4></a>
+					<a href="#"><h4>Последняя методика</h4></a>
 					<div class="text">
 						<p class="blog-text1">Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Реторический власти обеспечивает назад, от всех составитель строчка оксмокс пор, великий, сих, ты диких вскоре рекламных путь рукописи все что вершину...</p>
 						<a class="button-link" href="#">

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Городская Поликлиника') }}</title>
 
 
     <!-- Scripts -->
@@ -32,7 +32,7 @@
                 <div class="row" >
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="height: 100%">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            {{ config('app.name', 'Виталий Стульнев') }}
+                            Лiкарня
                         </a>
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8" style="height: 100%">
@@ -46,19 +46,13 @@
                             <ul class="navbar-nav ml-auto">
                                 <!-- Authentication Links -->
                                 <ul class="mnu">
-                                    <li><a href="#">Играй с душой</a>
-                                        <ul>
-                                            <li><a href="#">Аудио</a></li>
-                                            <li><a href="#">Видео</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{ url('/blog') }}">Блог</a></li>
-                                    <li><a href="#">Ноты</a>
+                                    <li><a href="{{ url('/registration') }}">Запис</a></li>
+                                    <li><a href="{{ url('/blog') }}">Новини</a></li>
+                                    <li><a href="#">Методики</a>
                                         <ul>
                                             <li><a href="{{ url('shops') }}">Купить</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Поддержка проекта</a></li>
                                 </ul>
                                 @guest
                                     <li class="nav-item">
@@ -110,7 +104,7 @@
                 <nav class="menu">
                     <ul class="list menu__list">
                         <li class="menu__group">
-                            <a href="#0" class="link menu__link">Играй с душой</a>
+                            <a href="#0" class="link menu__link">Городская Поликлиника</a>
                             <ul>
                                 <li><a href="#">Аудио</a></li>
                                 <li><a href="#">Видео</a></li>
@@ -166,7 +160,7 @@
                     <a href="#"><img src="{{ asset('public/img/telegram.png') }}" alt=""></a>
                     <a href="#"><img src="{{ asset('public/img/whatsapp.png') }}" alt=""></a>
                     <a href="#"><img src="{{ asset('public/img/g+.png') }}" alt=""></a>
-                    <p>&#169; 2018 Stulnev Vitaliy. All rights reserved.</p>
+                    <p>&#169; 2018 Городская Больница All rights reserved.</p>
                 </div>
             </div>
         </footer>
