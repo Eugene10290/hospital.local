@@ -38,5 +38,6 @@ class DatabaseSeeder extends Seeder
         //Применение роли к пользователю
         $user->attachRole($role);
 
+
     }
 }

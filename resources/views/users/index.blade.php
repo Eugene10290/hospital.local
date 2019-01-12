@@ -24,9 +24,7 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach ($users as $key => $user)
-
                                 <tr class="list-users">
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $user->name }}</td>

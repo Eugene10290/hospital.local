@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts\app')
+s
 
 @section('content')
 <link href="{{ asset('public/css/shop/shoping-cart.css') }}" rel="stylesheet" type="text/css" >
