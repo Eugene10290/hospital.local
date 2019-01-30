@@ -20,24 +20,17 @@
                                 <th>Почта</th>
                                 <th>Должность</th>
                                 <th>Действие</th>
-                                <th></th>
+
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($users as $key => $user)
-                                @if($user->hasRole('Врач'))
+                                @if( ($user->is_doctor) === 1 )
                                     <tr class="list-users">
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            @if(!empty($user->roles))
-                                                @foreach($user->roles as $role)
-                                                    <label class="label label-success">{{ $role->display_name }}</label>
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-info" href="#">Запись</a>
+                                            <a class="btn btn-info" href="{{ url('doctors/register-to/'.$user->id) }}">Запись</a>
                                         </td>
                                     </tr>
                                 @endif

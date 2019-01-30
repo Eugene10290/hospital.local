@@ -42,4 +42,6 @@ Route::group(['prefix' => 'user'], function() {
 });
 Route::group(['prefix' => 'doctors'], function(){
     Route::get('list', 'RegistrationController@index');
+    Route::get('register-to/{id}', 'RegistrationController@registerTo');
+    Route::post('registration', 'RegistrationController@addRegistrationEvent');
 });

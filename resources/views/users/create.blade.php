@@ -89,6 +89,13 @@
                                     @endif
                                 </div>
                             </div>
+                            <!--is_doctor-->
+                            <div class="checkbox checkbox-success form-group">
+                                <div class="col-md-6 control-label">
+                                    <input name="is_doctor" id="is_doctor" type="checkbox" >
+                                    <label for="is_doctor">Это врач</label>
+                                </div>
+                            </div>
                             <!--Создание и отмена-->
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">

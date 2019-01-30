@@ -55,12 +55,17 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public  function store(UserStoreRequest $request) {
-        $input = $request->only('name', 'email', 'password');
+
+        $input = $request->only('name', 'email', 'password', 'is_doctor');
+        if(isset($request->is_doctor)) {
+            $input['is_doctor'] = 1;
+        }
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-
-        foreach ($request->input('roles') as $key => $value){
-            $user->attachRole($value);
+        if(!empty($request->input('roles'))){
+            foreach ($request->input('roles') as $key => $value){
+                $user->attachRole($value);
+            }
         }
 
         return redirect()->route('users.index')->with('success', 'Пользователь создан успешно');

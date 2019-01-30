@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_doctor'
     ];
 
     /**
@@ -54,4 +54,14 @@ class User extends Authenticatable
     public function products() {
         return $this->hasMany('App\Product');
     }
+
+    /**
+     * pivot table для регистраций
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function registrations() {
+        return $this->belongsToMany('App\Registration');
+    }
+
 }
