@@ -72,6 +72,7 @@
                                         @if(\Entrust::can('index'))
                                             <a class="dropdown-item" href="{{ url('admin/') }}">{{ __('Админ-панель') }}</a>
                                         @endif
+                                        <a class="dropdown-item" href="{{ url('/user/registrations') }}">Записи</a>
                                         <a class="dropdown-item" href="{{ url('user/orders') }}">Заказы</a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

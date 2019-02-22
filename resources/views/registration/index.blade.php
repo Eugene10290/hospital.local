@@ -30,7 +30,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <a class="btn btn-info" href="{{ url('doctors/register-to/'.$user->id) }}">Запись</a>
+                                            <a class="btn btn-info" href="{{ url('doctors/register-to/'.$user->slug) }}">Запись</a>
                                         </td>
                                     </tr>
                                 @endif

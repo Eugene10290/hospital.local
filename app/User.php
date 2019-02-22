@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_doctor'
+        'name', 'email', 'password', 'is_doctor','slug'
     ];
 
     /**
@@ -56,12 +56,12 @@ class User extends Authenticatable
     }
 
     /**
-     * pivot table для регистраций
+     * Пользователь может много раз зарегистрироваться к врачам
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function registrations() {
-        return $this->belongsToMany('App\Registration');
+        return $this->HasMany('App\Registration');
     }
 
 }

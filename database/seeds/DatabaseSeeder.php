@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
         $user = [
             'name' => 'Администратор',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'slug' => str_slug('Администратор')
         ];
         $user = User::create($user);
         //Применение роли к пользователю

@@ -97,7 +97,9 @@ class UserController extends Controller
             'password' => 'confirmed'
         ]);
         $input = $request->only('name', 'email', 'password');
-
+        if(isset($request->is_doctor)) {
+            $input['is_doctor'] = 1;
+        }
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']); //обновление пароля
         }else{
