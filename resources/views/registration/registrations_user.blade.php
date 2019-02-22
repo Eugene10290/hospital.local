@@ -13,12 +13,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">Врач 1</th>
-                            <td>26.02.2018</td>
-                            <td>15:40</td>
-                            <td>Врач ожидает вас</td>
-                        </tr>
+                        @foreach($registrations as $registration)
+                            @foreach($doctors as $doctor)
+                                <tr>
+                                    <th scope="row">{{$doctor[0]->name}}</th>
+                                    <td>{{ $registration->start_date }}</td>
+                                    <td>15:40</td>
+                                    <td>Врач ожидает вас</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>

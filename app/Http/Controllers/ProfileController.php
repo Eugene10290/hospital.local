@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use User;
+use App\User;
 use App\Registration;
 use Calendar;
 
@@ -38,21 +38,40 @@ class ProfileController extends Controller
     public function registrations(){
         $user = Auth::user();
         if($user['is_doctor'] === 0){
-            return view('registration.registrations_user',compact('user'));
+            $registrations = $this->showUsersRegistration();
+
+            foreach ($registrations as $registration){
+                $doctors[] = User::where('id', '=', $registration->doctor_id)
+                    ->get();
+            }
+
+            return view('registration.registrations_user',compact('registrations','doctors'));
         }else{
-            $calendar = $this->showRegistrations();
+            $calendar = $this->showDoctorsRegistrations();
 
             return view('registration.registrations_doctor', compact('calendar'));
         }
+    }
+    /**
+     * Выборка записей авторизированного пользователя к врачам
+     *
+     * @return mixed
+     */
+    private function showUsersRegistration(){
+        $registrations = Registration::where('user_id', '=', Auth::user()->id)
+            ->get();
+
+        return $registrations;
     }
     /**
      * Отображение календаря с записями для каждого отдельного врача
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    private function showRegistrations(){
+    private function showDoctorsRegistrations(){
 
-        $registrations = Registration::where('doctor_id','=',Auth::user()->id)->get();
+        $registrations = Registration::where('doctor_id', '=', Auth::user()->id)
+            ->get();
         $calendar = $this->showCalendar($registrations);
 
         return $calendar;
