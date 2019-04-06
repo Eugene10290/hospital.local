@@ -39,9 +39,13 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('orders', 'ProfileController@index');
     Route::get('orders/download/{name}','ProfileController@downloadPdf');
     Route::get('/registrations', 'ProfileController@registrations')->name('registrations');
+    Route::get('/profile', 'ProfileController@profile');
+    Route::post('/profile/update', 'ProfileController@updateProfile')->name('profile.update');
 });
 Route::group(['prefix' => 'doctors'], function(){
     Route::get('list', 'RegistrationController@index');
     Route::get('register-to/{slug}', 'RegistrationController@registerTo');
     Route::post('register-to', 'RegistrationController@addRegistrationEvent')->name('register-to.add');
+
 });
+Route::post('register-time', 'RegistrationController@registerTime')->name('register-time');

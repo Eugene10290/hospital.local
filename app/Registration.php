@@ -2,10 +2,18 @@
 
 namespace App;
 
+use Rinvex\Bookings\Models\BookableBooking;
 use Illuminate\Database\Eloquent\Model;
 
 class Registration extends Model
 {
+
+
+    /**
+     * Поиск по slug
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';

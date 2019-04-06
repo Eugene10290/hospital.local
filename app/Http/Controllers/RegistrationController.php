@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
 use App\User;
 use Calendar;
 use App\Registration;
 use Auth;
+use DateTime;
+use DatePeriod;
+use DateInterval;
 class RegistrationController extends Controller
 {
     public function __construct()
@@ -32,27 +35,69 @@ class RegistrationController extends Controller
     public function registerTo(Request $request){
         $user = User::where('slug','=', $request->slug)->get();
         $userName = $user[0]->name;
+        $calendar = $this->getCalendar();
+        $doctor_id = $user[0]->id;
+
+        return view('registration.register', compact('userName', 'calendar','doctor_id', 'user'));
+    }
+
+    /**
+     * Ajax функция для выбора даты и времени
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function registerTime(Request $request){
+        $selectedDate  = $request['date'];
+        $url = $request['url'];
+        $parsedUrl = parse_url($url);
+        $explodeParsedUrl = explode('/',$parsedUrl['path']);
+        $doctor = User::where('slug','=',$explodeParsedUrl[3])->get();
+
+        $splittedTime = $this->splitTime($doctor,$selectedDate);
+
+        return response()->json(array('success' => 'true', 'splittedTime' => $splittedTime));
+    }
+    /**
+     * Функция делит время на промежутки
+     *
+     * @param $doctor
+     * @param $selectedDate
+     * @return array
+     */
+    private function splitTime($doctor, $selectedDate){
+        $startTime = strtotime($selectedDate . ' ' . $doctor[0]['doctors']['start_time']); //Начало и конец смены врача
+        $endTime = strtotime($selectedDate . ' ' . $doctor[0]['doctors']['end_time']);
+        $interval = "25";
+        $time=$startTime;
+        while ($time < $endTime) {
+            $array[] =  date('H:i', $time);
+            $time = strtotime('+'.$interval.' minutes', $time);
+        }
+
+        return $array;
+    }
+
+    private function getCalendar(){
         $events = [];
         $data = Registration::all();
         if($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
                     $value->title,
-                    true,
+                    false,
                     new \DateTime($value->start_date),
-                    new \DateTime($value->end_date.' +1 day'),
+                    new \DateTime($value->end_date.' +25 minutes'),
                     null,
-                    // Add color and link on event
                     [
                         'color' => '#f05050',
-                        //'url' => '/register-to/'. $user[0]->slug,
                     ]
                 );
             }
         }
         $calendar = Calendar::addEvents($events);
-        $doctor_id = $user[0]->id;
-        return view('registration.register', compact('userName', 'calendar','doctor_id'));
+
+        return $calendar;
     }
     /**
      * Регистрация записи к врачу
@@ -61,9 +106,12 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function addRegistrationEvent(Request $request){
+        $insertedDateTime = date( 'Y-m-d H:i:s',
+            strtotime($request['start_date'] . $request['booking-time']));
         $user = Auth::user();
         $request['title'] = $user->name;
-        $request['end_date'] = $request['start_date'];
+        $request['start_date'] = $insertedDateTime;
+        $request['end_date'] = $insertedDateTime;
         $user->registrations()->create($request->all());
 
         return redirect('/doctors/list');

@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\Registration;
 use Calendar;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -69,7 +70,6 @@ class ProfileController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     private function showDoctorsRegistrations(){
-
         $registrations = Registration::where('doctor_id', '=', Auth::user()->id)
             ->get();
         $calendar = $this->showCalendar($registrations);
@@ -104,6 +104,18 @@ class ProfileController extends Controller
         $calendar = Calendar::addEvents($events);
 
         return $calendar;
+    }
+
+    public function profile(){
+        return view('profile.index');
+    }
+    public function updateProfile(Request $request){
+        //dd($request);
+        $user = Auth::user();
+        $user->doctors()->create($request->all());
+
+        return redirect()->back();
+
     }
     /**
      * Формирование ссылки для загрузки нот

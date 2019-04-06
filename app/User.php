@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -62,6 +63,10 @@ class User extends Authenticatable
      */
     public function registrations() {
         return $this->HasMany('App\Registration');
+    }
+
+    public function doctors(){
+        return $this->hasOne('App\Doctors');
     }
 
 }

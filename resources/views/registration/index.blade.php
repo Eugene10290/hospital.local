@@ -19,6 +19,7 @@
                                 <th>Имя</th>
                                 <th>Почта</th>
                                 <th>Должность</th>
+                                <th>Описание</th>
                                 <th>Действие</th>
 
                             </tr>
@@ -29,6 +30,8 @@
                                     <tr class="list-users">
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->doctors['position']}}</td>
+                                        <td>{{ $user->doctors['description'] }}</td>
                                         <td>
                                             <a class="btn btn-info" href="{{ url('doctors/register-to/'.$user->slug) }}">Запись</a>
                                         </td>
