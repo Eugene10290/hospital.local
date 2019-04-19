@@ -8,12 +8,11 @@
 @section('content')
     <h1>{{ $userName }}(Выберите дату посещения этого врача)</h1>
     <h3>Время работы: {{ $user[0]->doctors['start_time'] }} - {{ $user[0]->doctors['end_time'] }}</h3>
-
     {{ Form::open(['route' => 'register-to.add', 'method' => 'POST', 'files' => 'true']) }}
     {{ csrf_field() }}
     <div class="form-group">
         {{ Form::label('Введите дату записи') }}
-        {{ Form::date('start_date', null, ['class' => 'form-control', 'id' => 'start_date']) }}
+        {{ Form::date('start_date', null, ['class' => 'form-control start_date', 'id' => 'start_date', 'min' => \Carbon\Carbon::now()->format('Y-m-d'), 'max' => \Carbon\Carbon::now()->addDays(21)->format('Y-m-d')]) }}
     </div>
     {{ Form::hidden('doctor_id', $doctor_id) }}
     <div class="form-group">
@@ -23,7 +22,6 @@
         {!! Form::submit('Записаться', ['class' => 'btn btn-primary form-control']) !!}
     </div>
     {{ Form::close() }}
-
     <div class="panel-body">
         {!! $calendar->calendar() !!}
         {!! $calendar->script() !!}

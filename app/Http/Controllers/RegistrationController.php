@@ -53,7 +53,6 @@ class RegistrationController extends Controller
         $parsedUrl = parse_url($url);
         $explodeParsedUrl = explode('/',$parsedUrl['path']);
         $doctor = User::where('slug','=',$explodeParsedUrl[3])->get();
-
         $splittedTime = $this->splitTime($doctor,$selectedDate);
 
         return response()->json(array('success' => 'true', 'splittedTime' => $splittedTime));
@@ -68,16 +67,31 @@ class RegistrationController extends Controller
     private function splitTime($doctor, $selectedDate){
         $startTime = strtotime($selectedDate . ' ' . $doctor[0]['doctors']['start_time']); //Начало и конец смены врача
         $endTime = strtotime($selectedDate . ' ' . $doctor[0]['doctors']['end_time']);
+        $currentDocReg = Registration::where(
+            ['doctor_id' => $doctor[0]['id']],
+            ['reg_day' => $selectedDate])
+            ->get();
         $interval = "25";
         $time=$startTime;
         while ($time < $endTime) {
             $array[] =  date('H:i', $time);
             $time = strtotime('+'.$interval.' minutes', $time);
+        }//исключение забронированного времени для вывода
+        foreach($currentDocReg as $regTime){
+            $bookedTime = date('H:i',strtotime($regTime->start_date));
+            if(($key = array_search($bookedTime, $array)) != false){
+                unset($array[$key]);
+            }
         }
 
         return $array;
     }
 
+    /**
+     * Инициализация календаря с событиями
+     *
+     * @return mixed
+     */
     private function getCalendar(){
         $events = [];
         $data = Registration::all();
@@ -110,6 +124,7 @@ class RegistrationController extends Controller
             strtotime($request['start_date'] . $request['booking-time']));
         $user = Auth::user();
         $request['title'] = $user->name;
+        $request['reg_day'] = $request['start_date'];
         $request['start_date'] = $insertedDateTime;
         $request['end_date'] = $insertedDateTime;
         $user->registrations()->create($request->all());

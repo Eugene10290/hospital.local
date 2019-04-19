@@ -20,7 +20,7 @@ class Registration extends Model
     }
 
     protected $fillable = [
-        'title', 'start_date', 'end_date','doctor_id','user_id'
+        'title', 'reg_day', 'start_date', 'end_date','doctor_id','user_id'
     ];
 
     /**

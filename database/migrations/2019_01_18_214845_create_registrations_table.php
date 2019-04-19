@@ -20,6 +20,7 @@ class CreateRegistrationsTable extends Migration
             $table->integer('doctor_id')->unsigned();
             $table->foreign('doctor_id')->references('id')->on('users');
             $table->string('title');
+            $table->date('reg_day');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();

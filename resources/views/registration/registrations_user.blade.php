@@ -13,13 +13,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($doctors as $doctor)
                         @foreach($registrations as $registration)
-                            @foreach($doctors as $doctor)
+                                <?php
+                                    $date = explode(' ', $registration->start_date);
+                                    $now = \Carbon\Carbon::now();
+                                    $registrationDate = \Carbon\Carbon::parse($registration->start_date)->format('Y-m-d H:i:s');
+                                ?>
                                 <tr>
                                     <th scope="row">{{$doctor[0]->name}}</th>
-                                    <td>{{ $registration->start_date }}</td>
-                                    <td>15:40</td>
-                                    <td>Врач ожидает вас</td>
+                                    <td>{{ $date[0] }}</td>
+                                    <td>{{ $date[1] }}</td>
+                                    @if($registrationDate > $now)
+                                        <td>Визит запланирован</td>
+                                    @else
+                                        <td>Визит состоялся</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @endforeach

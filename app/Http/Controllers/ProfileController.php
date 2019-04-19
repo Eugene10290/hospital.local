@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\Registration;
 use Calendar;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -60,7 +61,7 @@ class ProfileController extends Controller
      */
     private function showUsersRegistration(){
         $registrations = Registration::where('user_id', '=', Auth::user()->id)
-            ->get();
+            ->get()->reverse();
 
         return $registrations;
     }
@@ -87,16 +88,16 @@ class ProfileController extends Controller
         $data = $registrations;
         if($data->count()) {
             foreach ($data as $key => $value) {
+                $value->end_date < Carbon::now() ? $color = 'gray' : $color = 'green';
                 $events[] = Calendar::event(
                     $value->title,
-                    true,
+                    false,
                     new \DateTime($value->start_date),
-                    new \DateTime($value->end_date.' +1 day'),
+                    new \DateTime($value->end_date.' +25 minutes'),
                     null,
-                    // Add color and link on event
                     [
-                        'color' => '#f05050',
-                        //'url' => '/register-to/'. $user[0]->slug,
+                        'color' => $color,
+                        'textColor' => 'white'
                     ]
                 );
             }
@@ -110,7 +111,6 @@ class ProfileController extends Controller
         return view('profile.index');
     }
     public function updateProfile(Request $request){
-        //dd($request);
         $user = Auth::user();
         $user->doctors()->create($request->all());
 
