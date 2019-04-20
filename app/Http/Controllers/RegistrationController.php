@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\User;
@@ -120,6 +121,7 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function addRegistrationEvent(Request $request){
+        $this->validateRegistrationDate($request);
         $insertedDateTime = date( 'Y-m-d H:i:s',
             strtotime($request['start_date'] . $request['booking-time']));
         $user = Auth::user();
@@ -130,5 +132,19 @@ class RegistrationController extends Controller
         $user->registrations()->create($request->all());
 
         return redirect('/doctors/list');
+    }
+    /**
+     * Проверка на выбор старых дат
+     *
+     * @param $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function validateRegistrationDate($request){
+        $now = Carbon::now()->format('Y-m-d');
+        $selectedDate = Carbon::createFromFormat('Y-m-d',$request['start_date']);
+
+        if($selectedDate->diffInDays($now, false) < 0){ //если выбрана старая дата
+            return redirect()->back();
+        };
     }
 }
