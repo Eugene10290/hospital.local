@@ -69,8 +69,8 @@ class RegistrationController extends Controller
         $startTime = strtotime($selectedDate . ' ' . $doctor[0]['doctors']['start_time']); //Начало и конец смены врача
         $endTime = strtotime($selectedDate . ' ' . $doctor[0]['doctors']['end_time']);
         $currentDocReg = Registration::where(
-            ['doctor_id' => $doctor[0]['id']],
-            ['reg_day' => $selectedDate])
+            'doctor_id',  $doctor[0]['id'])
+            ->where('reg_day', $selectedDate)
             ->get();
         $interval = "25";
         $time=$startTime;
@@ -79,8 +79,8 @@ class RegistrationController extends Controller
             $time = strtotime('+'.$interval.' minutes', $time);
         }//исключение забронированного времени для вывода
         foreach($currentDocReg as $regTime){
-            $bookedTime = date('H:i',strtotime($regTime->start_date));
-            if(($key = array_search($bookedTime, $array)) != false){
+           $bookedTime = date('H:i',strtotime($regTime->start_date));
+            if(($key = array_search($bookedTime, $array)) !== false){
                 unset($array[$key]);
             }
         }
