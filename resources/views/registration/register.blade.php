@@ -31,7 +31,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <script src="{{ asset('js/datepicker-localization.js') }}"></script>
     <script type="text/javascript">
-
         $(document).ready(function(){
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
