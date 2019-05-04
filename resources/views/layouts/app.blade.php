@@ -60,7 +60,8 @@
                                     </li>
                                 @else
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="position: relative; padding-left: 50px">
+                                        <img src="{{ asset('images/uploads/avatars/' .  Auth::user()->avatar ) }}" style="width: 32px; height: 32px; position: absolute; border-radius: 50%; top:27px; left: 10px;">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

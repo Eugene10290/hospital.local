@@ -8,12 +8,14 @@ use App\Registration;
 use Calendar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Intervention\Image\Facades\Image;
+use Illuminate\Contracts\Filesystem\Factory;
 class ProfileController extends Controller
 {
-    public function __construct()
+    public function __construct(Factory $factory)
     {
         $this->middleware('auth');
+        $this->factory = $factory;
     }
     /**
      * Возвращает все заказы пользователя
@@ -21,11 +23,9 @@ class ProfileController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-
         $orders = Auth::user()->orders->where('status','=', '1'); //отображение только оплаченных заказов
         $orders->transform(function ($order){
             $order->cart = unserialize($order->cart);
-
             return $order;
         });
 
@@ -108,11 +108,34 @@ class ProfileController extends Controller
     }
 
     public function profile(){
-        return view('profile.index');
+        $doctor = Auth::user()->doctors;
+       // dd($doctor->start_time);
+        return view('profile.index', compact('doctor'));
     }
     public function updateProfile(Request $request){
         $user = Auth::user();
-        $user->doctors()->create($request->all());
+        if($user->is_doctor === 1){
+           //dd($request);
+            $user->doctors()->update($request->except(['_token', 'avatar']));
+
+        };
+
+        if($request->hasFile('avatar')){
+            $oldImg = $user->avatar;
+            $avatar = $request->file('avatar');
+            $filename = time() . '.'.$avatar->getClientOriginalExtension();
+            $savePath = public_path('images/uploads/avatars/' . $filename);
+            Image::make($avatar)->resize(300,300)
+                ->save($savePath);
+            $user->avatar = $filename;
+            $user->save();
+            //удаление старого аватара
+            if($oldImg !== 'default.jpg'){
+                $disk = $this->factory->disk('uploads');
+                $disk->delete('/avatars/'.$oldImg);
+            }
+        }
+
 
         return redirect()->back();
 
