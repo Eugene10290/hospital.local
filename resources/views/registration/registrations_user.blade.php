@@ -6,10 +6,11 @@
                 <table class="table table-hover" style="margin-top: 50px">
                     <thead>
                         <tr>
-                            <th scope="col">Врач</th>
+                            <th scope="col">Лікар</th>
                             <th scope="col">Дата</th>
-                            <th scope="col">Время</th>
+                            <th scope="col">Час</th>
                             <th scope="col">Статус</th>
+							<th scope="col">Дія</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,10 +26,13 @@
                                     <td>{{ $date[0] }}</td>
                                     <td>{{ $date[1] }}</td>
                                     @if($registrationDate > $now)
-                                        <td>Визит запланирован</td>
+                                        <td>Візит заплановано</td>
                                     @else
-                                        <td>Визит состоялся</td>
+                                        <td>Візит відбувся</td>
                                     @endif
+									<td> 
+										<button type="button" class="btn btn-danger">Відміна</button>
+									</td>
                                 </tr>
                             @endforeach
                         @endforeach

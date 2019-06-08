@@ -4,20 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Городская Поликлиника') }}</title>
-
-
+    <title>{{ config('app.name', 'Міська Лікарня') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
 <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -41,14 +35,13 @@
                             <ul class="navbar-nav mr-auto">
 
                             </ul>
-
                             <!-- Right Side Of Navbar -->
                             <ul class="navbar-nav ml-auto">
                                 <!-- Authentication Links -->
                                 <ul class="mnu">
                                     <li><a href="{{ url('/doctors/list') }}">Запис</a></li>
                                     <li><a href="{{ url('/blog') }}">Новини</a></li>
-                                    <li><a href="#">Методики</a>
+                                    <li><a href="#"></a>
                                         <ul>
                                             <li><a href="{{ url('shops') }}">Купить</a></li>
                                         </ul>
@@ -56,7 +49,7 @@
                                 </ul>
                                 @guest
                                     <li class="nav-item">
-                                        <a class="nav-link gate-site" href="{{ route('login') }}">{{ __('Вход') }}</a>
+                                        <a class="nav-link gate-site" href="{{ route('login') }}">{{ __('Вхід') }}</a>
                                     </li>
                                 @else
                                 <li class="nav-item dropdown">
@@ -93,10 +86,10 @@
 
         <main class="py-4">
             @yield('content')
-            <a href="{{ url('shopping-cart') }}" class="basket">
+            <!--<a href="{{ url('shopping-cart') }}" class="basket">
                 <span class="badge" style="background-color: red">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
                 <img src="{{ asset('public/img/basket.png') }}" class="img-basket" alt="">
-            </a>
+            </a>-->
             <div class="d-lg-none d-md-none hidden-sm col-xs-8" style="height: 100%">
             <div class="header">
                 <div class="hamburger">

@@ -114,6 +114,7 @@ class RegistrationController extends Controller
 
         return $calendar;
     }
+
     /**
      * Регистрация записи к врачу
      *

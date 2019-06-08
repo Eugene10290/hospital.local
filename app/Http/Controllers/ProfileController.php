@@ -107,19 +107,56 @@ class ProfileController extends Controller
         return $calendar;
     }
 
+    /**
+     * Отображение профиля
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function profile(){
         $doctor = Auth::user()->doctors;
-       // dd($doctor->start_time);
+
         return view('profile.index', compact('doctor'));
     }
+
+    /**
+     * Обновление информации о пользователе
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateProfile(Request $request){
         $user = Auth::user();
         if($user->is_doctor === 1){
-           //dd($request);
-            $user->doctors()->update($request->except(['_token', 'avatar']));
+            if(isset($user->doctors)){
+                $user->doctors()->update($request->except(['_token', 'avatar']));
+            }else{
+                $user->doctors()->create($request->except(['_token', 'avatar']));
+            }
 
         };
+        $this->updateAvatar($request, $user);
 
+        return redirect()->back();
+    }
+    /**
+     * Формирование ссылки для загрузки нот
+     *
+     * @param $name
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadPdf($name) {
+        $path = storage_path('app\notes/'.$name);
+
+        return response()->download($path);
+    }
+
+    /**
+     * Обновление аватара пользователя
+     *
+     * @param $request
+     * @param $user
+     */
+    private function updateAvatar($request, $user){
         if($request->hasFile('avatar')){
             $oldImg = $user->avatar;
             $avatar = $request->file('avatar');
@@ -135,20 +172,5 @@ class ProfileController extends Controller
                 $disk->delete('/avatars/'.$oldImg);
             }
         }
-
-
-        return redirect()->back();
-
-    }
-    /**
-     * Формирование ссылки для загрузки нот
-     *
-     * @param $name
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    public function downloadPdf($name) {
-        $path = storage_path('app\notes/'.$name);
-
-        return response()->download($path);
     }
 }

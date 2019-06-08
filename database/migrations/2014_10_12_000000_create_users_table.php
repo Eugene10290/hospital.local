@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('default.jpg');
             $table->boolean('is_doctor')->default(0);
             $table->string('slug');
+            $table->string('address')->nullable();
+            $table->integer('card_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

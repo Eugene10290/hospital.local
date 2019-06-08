@@ -16,8 +16,8 @@ class Doctors extends Migration
         Schema::create('doctors', function (Blueprint $table){
             $table->increments('id');
             $table->integer('user_id');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->string('position');
             $table->text('description');
             $table->timestamps();

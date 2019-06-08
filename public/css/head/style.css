@@ -231,7 +231,12 @@ header{
 	outline: 0;
 	opacity: 1;
 }
-
+.footer {
+	background-color: #fff;
+}
+body > footer:nth-child(3){
+	background-color: #fff;
+}
 footer .row{
 	display: inline;
 }

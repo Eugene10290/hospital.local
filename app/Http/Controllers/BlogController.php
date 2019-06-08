@@ -61,6 +61,7 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
+        dd($request);
         $blog = $this->createBlogArticle($request);
         $tags = $request->input('tag_list');
         $this->validateNewTag($tags, $blog);
@@ -116,7 +117,6 @@ class BlogController extends Controller
         }
 
         $this->validateNewTag($tags, $blog);
-
 
         return redirect('blog/'.$blog->slug);
     }

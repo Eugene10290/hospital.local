@@ -1,0 +1,15 @@
+.avatar {
+    position: relative;
+    margin: 0 auto;
+}
+.avatar > img{
+    margin: 0 auto;
+    position: relative;
+}
+body{background:url(http://bootstraptema.ru/images/bg/bg-5.png)}
+.wrapper {
+	background-color: #fff;
+	margin-top: 15px;
+	padding-bottom: 10px;
+	border-radius: 5px;
+}

@@ -79,7 +79,7 @@
                             <div class="top-row">
                                 <div class="form-group form-group-top row">
                                     <div class="col-md-12">
-                                        <input id="name" type="text" placeholder="{{ __('Имя *') }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                        <input id="name" type="text" placeholder="{{ __('Імя *') }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
                                         @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -90,7 +90,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <input id="email"  type="email" placeholder="{{ __('E-Mail Адресс *') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                        <input id="email"  type="email" placeholder="{{ __('E-Mail Адреса *') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                         @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -115,14 +115,14 @@
 
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <input id="password-confirm" type="password" placeholder="{{ __('Повторите пароль *') }}" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" type="password" placeholder="{{ __('Підтвердіть пароль *') }}" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4" id="button-reg">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Регистрация') }}
+                                        {{ __('Реєстрація') }}
                                     </button>
                                 </div>
                             </div>

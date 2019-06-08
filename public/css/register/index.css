@@ -1,0 +1,32 @@
+body {
+	background:url(http://bootstraptema.ru/images/bg/bg-5.png)
+}
+.wrapper {
+    position: relative;
+	background-color: #fff;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.doctor {
+    position: relative;
+    float: left;
+    padding-right: 10px;
+    width: 25%;
+}
+.doctor > description {
+    position: relative;
+    margin: 0 auto;
+    left: 30%;
+    word-wrap: normal;
+    word-wrap: break-word;
+}
+.doctor > image {
+    display: block;
+    width: 100%;
+	border-radius: 5px;
+}
+.create-reg {
+    position: relative;
+    float: right;
+	padding-right: 100px;
+}
