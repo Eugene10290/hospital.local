@@ -93,7 +93,7 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="serviceBox">
                             <div class="service-icon">
-                                <img src="{{asset('images/uploads/avatars/'. $user->avatar)}}">
+                                <img src="{{asset('public/images/uploads/avatars/'. $user->avatar)}}">
                             </div>
                             <div class="service-content">
                                 <h3><a href="#">{{ $user->name }}</a></h3>

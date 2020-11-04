@@ -39,6 +39,7 @@ class ProfileController extends Controller
      */
     public function registrations(){
         $user = Auth::user();
+
         if($user['is_doctor'] === 0){
             $registrations = $this->showUsersRegistration();
 
