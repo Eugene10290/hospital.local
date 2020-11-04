@@ -19,6 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home'); //Удалить
 Route::resource('blog', 'UserBlogController', ['only' => [
     'index', 'show'
 ]]);
+
 Route::get('shops','ProductController@index');
 Route::get('add-to-cart/{id}','ProductController@getAddToCart');
 Route::get('reduce/{id}', 'ProductController@getReduceByOne');
@@ -27,6 +28,7 @@ Route::get('shopping-cart', 'ProductController@getCart');
 Route::get('checkout', 'ProductController@getCheckout');
 Route::get('status', 'ProductController@paymentStatus');
 Route::get('tags/{tags}', 'TagsController@show');
+
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'DashboardController@index');
     Route::resource('/roles','RoleController');
@@ -35,8 +37,8 @@ Route::group(['prefix' => 'admin'], function(){
         'blogs' => 'blog'
     ]);
     Route::resource('/notes', 'NotesController');
-
 });
+
 Route::group(['prefix' => 'user'], function() {
     Route::get('orders', 'ProfileController@index');
     Route::get('orders/download/{name}','ProfileController@downloadPdf');
