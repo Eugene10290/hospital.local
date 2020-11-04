@@ -18,6 +18,7 @@ Auth::routes();
 Route::resource('blog', 'UserBlogController', ['only' => [
     'index', 'show'
 ]]);
+
 Route::get('shops','ProductController@index');
 Route::get('add-to-cart/{id}','ProductController@getAddToCart');
 Route::get('reduce/{id}', 'ProductController@getReduceByOne');
@@ -26,6 +27,7 @@ Route::get('shopping-cart', 'ProductController@getCart');
 Route::get('checkout', 'ProductController@getCheckout');
 Route::get('status', 'ProductController@paymentStatus');
 Route::get('tags/{tags}', 'TagsController@show');
+
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'DashboardController@index');
     Route::resource('/roles','RoleController');
@@ -35,6 +37,7 @@ Route::group(['prefix' => 'admin'], function(){
     ]);
     Route::resource('/notes', 'NotesController');
 });
+
 Route::group(['prefix' => 'user'], function() {
     Route::get('orders', 'ProfileController@index');
     Route::get('orders/download/{name}','ProfileController@downloadPdf');
@@ -42,10 +45,12 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('/profile', 'ProfileController@profile');
     Route::post('/profile/update', 'ProfileController@updateProfile')->name('profile.update');
 });
+
 Route::group(['prefix' => 'doctors'], function(){
     Route::get('list', 'RegistrationController@index');
     Route::get('register-to/{slug}', 'RegistrationController@registerTo');
     Route::post('register-to', 'RegistrationController@addRegistrationEvent')->name('register-to.add');
 
 });
+
 Route::post('register-time', 'RegistrationController@registerTime')->name('register-time');
