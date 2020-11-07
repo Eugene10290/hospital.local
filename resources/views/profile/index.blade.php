@@ -7,7 +7,7 @@
         <h1>Редагування профілю</h1>
 
         <div class="avatar" >
-            <img src="{{ asset('images/uploads/avatars/' .  Auth::user()->avatar ) }}" style="width: 150px; height: 150px; border-radius: 50%;">
+            <img src="{{ asset('public/images/uploads/avatars/' .  Auth::user()->avatar ) }}" style="width: 150px; height: 150px; border-radius: 50%;">
         </div>
         {!! Form::open(['route' => 'profile.update', 'method' => 'post', 'files' => true]) !!}
         {!! Form::token() !!}

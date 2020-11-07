@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Contracts\Filesystem\Factory;
+
 class ProfileController extends Controller
 {
     public function __construct(Factory $factory)
@@ -66,10 +67,12 @@ class ProfileController extends Controller
 
         return $registrations;
     }
+
     /**
      * Отображение календаря с записями для каждого отдельного врача
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
     private function showDoctorsRegistrations(){
         $registrations = Registration::where('doctor_id', '=', Auth::user()->id)
@@ -78,17 +81,20 @@ class ProfileController extends Controller
 
         return $calendar;
     }
+
     /**
      * Отображение календаря с записями
      *
      * @param $registrations
+     *
      * @return mixed
+     * @throws \Exception
      */
     public function showCalendar($registrations){
         $events = [];
-        $data = $registrations;
-        if($data->count()) {
-            foreach ($data as $key => $value) {
+
+        if($registrations->count()) {
+            foreach ($registrations as $key => $value) {
                 $value->end_date < Carbon::now() ? $color = 'gray' : $color = 'green';
                 $events[] = Calendar::event(
                     $value->title,
@@ -103,6 +109,7 @@ class ProfileController extends Controller
                 );
             }
         }
+
         $calendar = Calendar::addEvents($events);
 
         return $calendar;
