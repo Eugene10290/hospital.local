@@ -65,8 +65,30 @@ class User extends Authenticatable
         return $this->HasMany('App\Registration');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function doctors(){
         return $this->hasOne('App\Doctors');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
+    /**
+     * Determined if user is doctor
+     *
+     * @return bool
+     */
+    public function isDoctor(): bool
+    {
+        return $this->attributes['is_doctor'] === 1 ?  true : false;
+    }
+
 
 }
